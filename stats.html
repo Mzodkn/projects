@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإحصائيات التحليلية | جيت الكم؟</title>
+    <!-- مكتبة Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- تم إصلاح الرابط هنا لاستخدام النسخة المستقرة مباشرة -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    </style>
+</head>
+<body class="bg-[#0a1a2f] bg-gradient-to-b from-[#0a1a2f] to-[#1f1f1f] bg-fixed text-gray-100 min-h-screen flex flex-col items-center pt-8 p-4 relative">
+
+    <!-- القائمة العلوية (Hamburger Menu) -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="menuBtn" onclick="toggleMenu()" class="p-3 bg-gray-900/60 border border-gray-700 rounded-xl backdrop-blur-md text-white hover:bg-gray-800 transition-all shadow-lg hover:shadow-blue-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+        <div id="dropdownMenu" class="absolute top-16 right-0 mt-2 w-64 bg-[#020024]/90 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right">
+            <div class="p-3 space-y-2">
+                <a href="index.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
+                    🏠 الرئيسية
+                </a>
+                <a href="stats.html" class="block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all">
+                    📊 إحصائيات تفاعلية
+                </a>
+                <a href="about.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
+                    👨‍💻 من أنا
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- حاوية المخطط البياني -->
+    <!-- تمت إزالة الحاوية الخاطئة max-w-3xl التي كانت تخنق الصفحة -->
+    <div class="max-w-5xl w-full bg-[#020024]/80 rounded-3xl shadow-2xl shadow-blue-900/20 p-6 sm:p-10 mb-10 mt-14 border border-gray-800 backdrop-blur-xl">
+        <h2 class="text-xl sm:text-2xl font-bold text-center text-blue-300 mb-2">التوزيع العام للدرجات والمستويات</h2>
+        <p class="text-center text-gray-400 mb-8 text-sm">يمثل هذا المخطط توزيع 547,608 طالب وطالبة بناءً على النسبة المئوية</p>
+        
+        <!-- استخدام style لضمان أن الحاوية تأخذ ارتفاعاً ثابتاً ولا تختفي -->
+        <div class="relative w-full" style="height: 400px;">
+            <canvas id="gradesChart"></canvas>
+        </div>
+    </div>
+
+    <!-- بطاقات التفاصيل الرقمية -->
+    <div class="max-w-5xl w-full grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div class="bg-emerald-900/20 border border-emerald-500/30 p-4 rounded-2xl text-center backdrop-blur-sm hover:bg-emerald-900/40 transition">
+            <span class="block text-emerald-400 text-sm font-bold mb-1">امتياز (90 - 100)</span>
+            <span class="block text-2xl font-bold text-white">3,886</span>
+        </div>
+        <div class="bg-green-900/20 border border-green-500/30 p-4 rounded-2xl text-center backdrop-blur-sm hover:bg-green-900/40 transition">
+            <span class="block text-green-400 text-sm font-bold mb-1">جيد جداً (80 - 89.9)</span>
+            <span class="block text-2xl font-bold text-white">22,477</span>
+        </div>
+        <div class="bg-blue-900/20 border border-blue-500/30 p-4 rounded-2xl text-center backdrop-blur-sm hover:bg-blue-900/40 transition">
+            <span class="block text-blue-400 text-sm font-bold mb-1">جيد (70 - 79.9)</span>
+            <span class="block text-2xl font-bold text-white">74,871</span>
+        </div>
+        <div class="bg-yellow-900/20 border border-yellow-500/30 p-4 rounded-2xl text-center backdrop-blur-sm hover:bg-yellow-900/40 transition">
+            <span class="block text-yellow-400 text-sm font-bold mb-1">متوسط (60 - 69.9)</span>
+            <span class="block text-2xl font-bold text-white">154,733</span>
+        </div>
+        <div class="bg-orange-900/20 border border-orange-500/30 p-4 rounded-2xl text-center backdrop-blur-sm hover:bg-orange-900/40 transition">
+            <span class="block text-orange-400 text-sm font-bold mb-1">مقبول (50 - 59.9)</span>
+            <span class="block text-2xl font-bold text-white">116,926</span>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 p-4 rounded-2xl text-center backdrop-blur-sm hover:bg-red-900/40 transition">
+            <span class="block text-red-400 text-sm font-bold mb-1">ضعيف (40 - 49.9)</span>
+            <span class="block text-2xl font-bold text-white">8,004</span>
+        </div>
+        <div class="col-span-2 bg-red-950/40 border border-red-700/50 p-4 rounded-2xl text-center backdrop-blur-sm hover:bg-red-900/60 transition shadow-inner">
+            <span class="block text-red-500 text-sm font-bold mb-1"> رسوب (أقل من 40)</span>
+            <span class="block text-3xl font-bold text-red-100">166,711</span>
+        </div>
+    </div>
+
+    <!-- السكريبتات -->
+    <script>
+        // التأكد من تحميل عناصر الصفحة قبل تشغيل المخطط
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            Chart.defaults.color = '#9ca3af';
+            Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+
+            const ctx = document.getElementById('gradesChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['امتياز', 'جيد جداً', 'جيد', 'متوسط', 'مقبول', 'ضعيف', 'رسوب'],
+                    datasets: [{
+                        label: 'عدد الطلاب',
+                        data: [3886, 22477, 74871, 154733, 116926, 8004, 166711],
+                        backgroundColor: [
+                            'rgba(16, 185, 129, 0.8)', // Emerald
+                            'rgba(34, 197, 94, 0.8)',  // Green
+                            'rgba(59, 130, 246, 0.8)', // Blue
+                            'rgba(234, 179, 8, 0.8)',  // Yellow
+                            'rgba(249, 115, 22, 0.8)', // Orange
+                            'rgba(239, 68, 68, 0.8)',  // Red
+                            'rgba(127, 29, 29, 0.9)'   // Dark Red
+                        ],
+                        borderColor: [
+                            '#10b981', '#22c55e', '#3b82f6', '#eab308', '#f97316', '#ef4444', '#7f1d1d'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { size: 16, family: 'Segoe UI' },
+                            bodyFont: { size: 14, family: 'Segoe UI', weight: 'bold' },
+                            padding: 12,
+                            borderColor: 'rgba(59, 130, 246, 0.5)',
+                            borderWidth: 1,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw.toLocaleString() + ' طالب';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)',
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                callback: function(value) { return value.toLocaleString(); }
+                            }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        });
+
+        // دالة إغلاق وفتح القائمة
+        function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            if (menu.classList.contains('opacity-0')) {
+                menu.classList.remove('opacity-0', 'invisible', 'scale-95');
+                menu.classList.add('opacity-100', 'visible', 'scale-100');
+            } else {
+                menu.classList.add('opacity-0', 'invisible', 'scale-95');
+                menu.classList.remove('opacity-100', 'visible', 'scale-100');
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('dropdownMenu');
+            const btn = document.getElementById('menuBtn');
+            if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.classList.add('opacity-0', 'invisible', 'scale-95');
+                menu.classList.remove('opacity-100', 'visible', 'scale-100');
+            }
+        });
+    </script>
+</body>
+</html>
