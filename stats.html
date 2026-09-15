@@ -74,9 +74,10 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            
+    <script src="app.js"></script>
+<script>
+      document.addEventListener("DOMContentLoaded", function() {
+   
             Chart.defaults.color = '#9ca3af';
             Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
 
@@ -149,25 +150,6 @@
             });
         });
 
-        function toggleMenu() {
-            const menu = document.getElementById('dropdownMenu');
-            if (menu.classList.contains('opacity-0')) {
-                menu.classList.remove('opacity-0', 'invisible', 'scale-95');
-                menu.classList.add('opacity-100', 'visible', 'scale-100');
-            } else {
-                menu.classList.add('opacity-0', 'invisible', 'scale-95');
-                menu.classList.remove('opacity-100', 'visible', 'scale-100');
-            }
-        }
-
-        document.addEventListener('click', function(event) {
-            const menu = document.getElementById('dropdownMenu');
-            const btn = document.getElementById('menuBtn');
-            if (!menu.contains(event.target) && !btn.contains(event.target)) {
-                menu.classList.add('opacity-0', 'invisible', 'scale-95');
-                menu.classList.remove('opacity-100', 'visible', 'scale-100');
-            }
-        });
-    </script>
+</script>
 </body>
 </html>
