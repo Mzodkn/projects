@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الإحصائيات التحليلية | جيت الكم؟</title>
-    <!-- مكتبة Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- تم إصلاح الرابط هنا لاستخدام النسخة المستقرة مباشرة -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -14,7 +12,6 @@
 </head>
 <body class="bg-[#0a1a2f] bg-gradient-to-b from-[#0a1a2f] to-[#1f1f1f] bg-fixed text-gray-100 min-h-screen flex flex-col items-center pt-8 p-4 relative">
 
-    <!-- القائمة العلوية (Hamburger Menu) -->
     <div class="fixed top-6 right-6 z-50">
         <button id="menuBtn" onclick="toggleMenu()" class="p-3 bg-gray-900/60 border border-gray-700 rounded-xl backdrop-blur-md text-white hover:bg-gray-800 transition-all shadow-lg hover:shadow-blue-500/20">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,19 +34,15 @@
         </div>
     </div>
 
-    <!-- حاوية المخطط البياني -->
-    <!-- تمت إزالة الحاوية الخاطئة max-w-3xl التي كانت تخنق الصفحة -->
     <div class="max-w-5xl w-full bg-[#020024]/80 rounded-3xl shadow-2xl shadow-blue-900/20 p-6 sm:p-10 mb-10 mt-14 border border-gray-800 backdrop-blur-xl">
         <h2 class="text-xl sm:text-2xl font-bold text-center text-blue-300 mb-2">التوزيع العام للدرجات والمستويات</h2>
         <p class="text-center text-gray-400 mb-8 text-sm">يمثل هذا المخطط توزيع 547,608 طالب وطالبة بناءً على النسبة المئوية</p>
         
-        <!-- استخدام style لضمان أن الحاوية تأخذ ارتفاعاً ثابتاً ولا تختفي -->
         <div class="relative w-full" style="height: 400px;">
             <canvas id="gradesChart"></canvas>
         </div>
     </div>
 
-    <!-- بطاقات التفاصيل الرقمية -->
     <div class="max-w-5xl w-full grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
         <div class="bg-emerald-900/20 border border-emerald-500/30 p-4 rounded-2xl text-center backdrop-blur-sm hover:bg-emerald-900/40 transition">
             <span class="block text-emerald-400 text-sm font-bold mb-1">امتياز (90 - 100)</span>
@@ -81,9 +74,7 @@
         </div>
     </div>
 
-    <!-- السكريبتات -->
     <script>
-        // التأكد من تحميل عناصر الصفحة قبل تشغيل المخطط
         document.addEventListener("DOMContentLoaded", function() {
             
             Chart.defaults.color = '#9ca3af';
@@ -158,7 +149,6 @@
             });
         });
 
-        // دالة إغلاق وفتح القائمة
         function toggleMenu() {
             const menu = document.getElementById('dropdownMenu');
             if (menu.classList.contains('opacity-0')) {

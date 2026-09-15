@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جيت الكم؟</title>
+    <title> 2026 جيت الكم؟</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -24,7 +24,6 @@
                     🏠 الرئيسية
                 </a>
                 
-                <!-- صفحة  (التي تفكر فيها) -->
                 <a href="stats.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
                     📊 إحصائيات تفاعلية
                 </a>
@@ -37,7 +36,7 @@
     </div>
     
     <h1 class="text-3xl font-bold text-center mb-4 p-10">جيت الكم؟</h1>
-    <strong class="block text-center text-lg mb-10">ابحث بالاسم او رقم الجلوس واعرف ترتيبك بين الممتحنين</strong>
+    <strong class="block text-center text-lg mb-10">   ابحث بالاسم او رقم الجلوس واعرف ترتيبك بين الممتحنين لسنة 2026</strong>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-8">
                 <div class="bg-blue-900/20 border border-blue-500/30 rounded-2xl p-4 text-center backdrop-blur-sm shadow-lg transition hover:bg-blue-900/30">
             <span class="block text-blue-400 text-sm font-semibold mb-1">إجمالي الجالسين</span>
@@ -83,20 +82,16 @@
 
         <div class="text-center mt-6">
             <button id="loadMoreBtn" onclick="loadMore()" class="hidden bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-semibold transition duration-200 w-full sm:w-auto shadow-md">
-                عرض 10 طلاب اخرين
             </button>
         </div>
     </div>
 </div>
-<!-- مفاجأة منار المخفية (Easter Egg) -->
     <div class="fixed bottom-4 left-4 z-50">
-        <!-- زر الحمامة المخفي -->
         <button onclick="showManarEgg()" class="opacity-20 hover:opacity-100 transition-opacity duration-300 text-3xl filter drop-shadow-lg cursor-pointer">
             🐦
         </button>
     </div>
 
-    <!-- رسائل الواتساب المنبثقة -->
     <div id="manarToast" class="fixed bottom-16 left-4 flex flex-col gap-2 transform scale-0 opacity-0 transition-all duration-300 origin-bottom-left z-50" dir="rtl">
         
         <div class="bg-[#202c33] text-white px-4 py-2 rounded-2xl rounded-br-none border border-gray-700/50 shadow-2xl max-w-xs w-fit">
@@ -109,16 +104,13 @@
         
     </div>
 
-    <!-- كود تشغيل المفاجأة -->
     <script>
         function showManarEgg() {
             const toast = document.getElementById('manarToast');
             
-            // إظهار الرسائل
             toast.classList.remove('scale-0', 'opacity-0');
             toast.classList.add('scale-100', 'opacity-100');
             
-            // إخفاء الرسائل تلقائياً بعد 6 ثوانٍ
             setTimeout(() => {
                 toast.classList.remove('scale-100', 'opacity-100');
                 toast.classList.add('scale-0', 'opacity-0');
@@ -159,7 +151,6 @@
         const resultArea = document.getElementById('resultArea');
         const loading = document.getElementById('loading');
         const searchBtn = document.getElementById('searchBtn');
-        // تم تصحيح الـ ID هنا ليطابق الموجود في HTML
         const loadMoreBtn = document.getElementById('loadMoreBtn');
         const searchStats = document.getElementById('searchStats');
 
