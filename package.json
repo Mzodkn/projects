@@ -1,0 +1,23 @@
+{
+  "name": "alkam",
+  "version": "1.0.0",
+  "description": "Student results search website with Vercel Web Analytics",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mzodkn/projects.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mzodkn/projects/issues"
+  },
+  "homepage": "https://github.com/Mzodkn/projects#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
