@@ -1,71 +1,51 @@
- 
-
-        //ماتحاول قافل عرض الداتابيز 
+//ماتحاول قافل عرض الداتابيز 
     const SUPABASE_URL = 'https://wxalmjkwstlstzktnuyz.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4YWxtamt3c3Rsc3R6a3RudXl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyNTMwMTcsImV4cCI6MjEwNDgyOTAxN30.Dr_W7B0hI9VuvlAUHHUiw_UP9gKAHttOB6Wq5cxIoG8';
 
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     
-    let currentPage = 1;
     let currentSearchTerm = '';
-    let currentSearchMode = 'starts_with';
-    let totalMatchesFound = 0;
-    let loadedMatches = 0;
 
     async function scb() {
         const input = document.getElementById('searchInput').value.trim();
         if (!input) return;
+        const containsLetters = /[a-zA-Z\u0600-\u06FF]/.test(input);
 
+        if (containsLetters) {
+            showError(' البحث متاح برقم الجلوس فقط ( أرقام ) . .');
+            return;
         currentSearchTerm = input;
-        currentSearchMode = document.getElementById('searchMode').value; 
-        currentPage = 1;
-        loadedMatches = 0;
         document.getElementById('resultarea').innerHTML = '';
         
         await fetchResults();
-    }
-
-    async function load() {
-        currentPage++;
-        await fetchResults();
-    }
+    }}
 
     async function fetchResults() {
-        const resultarea = document.getElementById('resultarea');
         const loading = document.getElementById('loading');
         const searchbtn = document.getElementById('searchbtn');
-        const loadbtn = document.getElementById('loadbtn');
         const searchStats = document.getElementById('searchStats');
+        const loadbtn = document.getElementById('loadbtn'); // في حال كان الزر موجوداً في HTML سنخفيه دائماً
 
         loading.classList.remove('hidden');
         searchbtn.disabled = true;
-        loadbtn.classList.add('hidden');
+        
+        // إخفاء الإحصائيات وزر التحميل دائماً
+        if(searchStats) searchStats.classList.add('hidden');
+        if(loadbtn) loadbtn.classList.add('hidden');
 
         try {
             const { data, error } = await supabaseClient.rpc('get_student_stats', { 
                 search_term: currentSearchTerm,
-                page_num: currentPage,
-                page_size: 10,
-                search_mode: currentSearchMode
+                page_num: 1, // تم التثبيت على الصفحة الأولى
+                page_size: 1 // تم التثبيت على نتيجة واحدة
             });
 
             if (error) throw error;
 
             if (data.error) {
                 showError(data.error);
-                searchStats.classList.add('hidden');
             } else {
-                totalMatchesFound = data.total_matches;
-                loadedMatches += data.matches.length;
-                
-                searchStats.innerHTML = `تم العثور على (<strong>${totalMatchesFound.toLocaleString()}</strong>) نتيجة مطابقة. يتم عرض (<strong>${loadedMatches}</strong>).`;
-                searchStats.classList.remove('hidden');
-                
                 appendMatches(data.matches);
-
-                if (loadedMatches < totalMatchesFound) {
-                    loadbtn.classList.remove('hidden');
-                }
             }
         } catch (err) {
             showError('حدث خطأ في الاتصال بقاعدة البيانات.');
@@ -76,7 +56,7 @@
         }
     }
 
-  function appendMatches(matches) {
+    function appendMatches(matches) {
         const resultarea = document.getElementById('resultarea');
         let htmlContent = '';
         
@@ -85,7 +65,6 @@
             if (student.status === 'نجاح') {
                 htmlContent += `
                     <div class="relative overflow-hidden border border-green-500/30 bg-gradient-to-br from-green-900/20 to-transparent p-6 rounded-2xl shadow-lg backdrop-blur-sm transition-all hover:border-green-500/50">
-                        <!-- خط علوي مضيء -->
                         <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-500"></div>
                         
                         <h2 class="text-2xl font-bold text-green-400 mb-1">${student.name}</h2>
@@ -110,7 +89,6 @@
             } else {
                 htmlContent += `
                     <div class="relative overflow-hidden border border-red-500/30 bg-gradient-to-br from-red-900/20 to-transparent p-6 rounded-2xl shadow-lg backdrop-blur-sm transition-all hover:border-red-500/50">
-                        <!-- خط علوي مضيء -->
                         <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-red-500 to-pink-600"></div>
                         
                         <h2 class="text-2xl font-bold text-red-400 mb-1">${student.name}</h2>
@@ -138,9 +116,10 @@
         const resultarea = document.getElementById('resultarea');
         resultarea.innerHTML = `<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded"><p class="font-bold">عذراً</p><p>${msg}</p></div>`;
         resultarea.classList.remove('hidden');
-        document.getElementById('searchStats').classList.add('hidden');
-        document.getElementById('loadbtn').classList.add('hidden');
+        if(document.getElementById('searchStats')) document.getElementById('searchStats').classList.add('hidden');
+        if(document.getElementById('loadbtn')) document.getElementById('loadbtn').classList.add('hidden');
     }
+    
     function toggleMenu() {
         const menu = document.getElementById('dropdownMenu');
         if (menu.classList.contains('opacity-0')) {
@@ -155,26 +134,30 @@
     document.addEventListener('click', function(event) {
         const menu = document.getElementById('dropdownMenu');
         const btn = document.getElementById('menuBtn');
-        if (!menu.contains(event.target) && !btn.contains(event.target)) {
+        if (menu && btn && !menu.contains(event.target) && !btn.contains(event.target)) {
             menu.classList.add('opacity-0', 'invisible', 'scale-95');
             menu.classList.remove('opacity-100', 'visible', 'scale-100');
         }
     });
+    
     function toggleStats() {
         const container = document.getElementById('statsContainer');
         const icon = document.getElementById('statsIcon');
 
-        if (container.classList.contains('hidden')) {
-            container.classList.remove('hidden');
-            icon.classList.add('rotate-180');
-        } else {
-            container.classList.add('hidden');
-            icon.classList.remove('rotate-180');
+        if (container && icon) {
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                container.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
         }
     }
-            function ester() {
-            const toast = document.getElementById('manarToast');
-            
+    
+    function ester() {
+        const toast = document.getElementById('manarToast');
+        if (toast) {
             toast.classList.remove('scale-0', 'opacity-0');
             toast.classList.add('scale-100', 'opacity-100');
             
@@ -183,7 +166,4 @@
                 toast.classList.add('scale-0', 'opacity-0');
             }, 6000);
         }
-
-
-          
-      
+    }

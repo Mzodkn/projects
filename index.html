@@ -37,10 +37,8 @@
     </div>
     
     <h1 class="text-3xl font-bold text-center mb-4 p-10">جيت الكم؟</h1>
-    <strong class="block text-center text-lg mb-10">   ابحث بالاسم او رقم الجلوس واعرف ترتيبك بين الممتحنين لسنة 2026</strong>
-<!-- قسم الإحصائيات القابل للطي -->
+    <strong class="block text-center text-lg mb-10">     ابحث برقم الجلوس واعرف ترتيبك بين الممتحنين لسنة 2026  </strong>
     <div class="w-full mb-8">
-        <!-- الزر الرئيسي (شريط الفتح والإغلاق) -->
         <button onclick="toggleStats()" class="w-full flex items-center justify-between bg-[#020024]/60 border border-blue-500/30 rounded-2xl p-4 backdrop-blur-md shadow-lg transition hover:bg-[#020024]/80 text-white cursor-pointer group">
             <div class="flex items-center gap-3">
                 <span class="text-2xl drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]">📊</span>
@@ -113,13 +111,9 @@
         <h1 class="text-3xl font-bold text-center text-white mb-6">شوف النتيجة</h1>
             
 <div class="flex flex-col sm:flex-row gap-3 mb-8 w-full">
+                 
     
-    <select id="searchMode" class="px-5 py-4 rounded-xl border border-gray-700 bg-gray-900/60 text-gray-200 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all backdrop-blur-md cursor-pointer font-semibold shadow-inner">
-        <option value="starts_with" class="bg-gray-900 text-white">بترتيب الاسم</option>
-        <option value="contains" class="bg-gray-900 text-white">تطابق بدون ترتيب</option>
-    </select>               
-    
-    <input type="text" id="searchInput" class="w-full px-5 py-4 rounded-xl border border-gray-700 bg-gray-900/60 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all backdrop-blur-md font-medium shadow-inner" placeholder="أدخل رقم الجلوس أو الاسم...">
+    <input type="text" id="searchInput" class="w-full px-5 py-4 rounded-xl border border-gray-700 bg-gray-900/60 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all backdrop-blur-md font-medium shadow-inner" placeholder="أدخل رقم الجلوس  ...">
     
   <button class="bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white px-10 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-orange-600/30 transform hover:-translate-y-1 active:translate-y-0" onclick="scb()" id="searchbtn">
     بحث
@@ -155,7 +149,7 @@
         
     </div>
 
-   <script src="app.js"></script>
+   <script src="app.js?2"></script>
    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLTXRYYWK8"></script>
 <script>
@@ -164,7 +158,6 @@
   gtag('js', new Date());
 
   gtag('config', 'G-GLTXRYYWK8');
-  
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
