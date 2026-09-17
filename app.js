@@ -10,7 +10,11 @@
         const input = document.getElementById('searchInput').value.trim();
         if (!input) return;
         const containsLetters = /[a-zA-Z\u0600-\u06FF]/.test(input);
-
+        if( input =="دازاي"){
+            document.getElementById('resultarea').classList.remove('hidden');
+             document.getElementById('resultarea').innerHTML = '<img src="daz.jpg" class="w-full max-w-md mx-auto rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 object-cover border border-gray-700/50">';
+            return
+        }
         if (containsLetters) {
             showError(' البحث متاح برقم الجلوس فقط ( أرقام ) . .');
             return;
