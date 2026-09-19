@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-5M3JD3CP"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'GT-5M3JD3CP',{'cookie_domain': window.location.hostname});
+    
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الإحصائيات التحليلية | جيت الكم؟</title>
@@ -9,15 +19,7 @@
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-5M3JD3CP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'GT-5M3JD3CP',{'cookie_domain': window.location.hostname});
-  
-</script>
 </head>
 <body class="bg-[#0a1a2f] bg-gradient-to-b from-[#0a1a2f] to-[#1f1f1f] bg-fixed text-gray-100 min-h-screen flex flex-col items-center pt-8 p-4 relative">
 
@@ -36,6 +38,9 @@
                   <a href="universities.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
                     🏛️ اختار الجامعة و التخصص
                 </a>
+                 <a href="saved.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
+                       ⭐ حفظ التخصص
+                    </a>
                 <a href="stats.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
                     📊 إحصائيات تفاعلية
                 </a>
@@ -89,8 +94,33 @@
 
     <script src="app.js"></script>
 <script>
+
+            function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.classList.toggle('opacity-0');
+            menu.classList.toggle('invisible');
+            menu.classList.toggle('scale-95');
+            menu.classList.toggle('scale-100');
+        }
+        window.addEventListener('click', function(e) {
+            const menu = document.getElementById('dropdownMenu');
+            const btn = document.getElementById('menuBtn');
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.add('opacity-0', 'invisible', 'scale-95');
+                menu.classList.remove('scale-100');
+            }
+        });
+
+
+
+
       document.addEventListener("DOMContentLoaded", function() {
-   
+        
+            
+
+
+
+
             Chart.defaults.color = '#9ca3af';
             Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
 

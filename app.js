@@ -29,20 +29,19 @@
         const loading = document.getElementById('loading');
         const searchbtn = document.getElementById('searchbtn');
         const searchStats = document.getElementById('searchStats');
-        const loadbtn = document.getElementById('loadbtn'); // في حال كان الزر موجوداً في HTML سنخفيه دائماً
+        const loadbtn = document.getElementById('loadbtn'); 
 
         loading.classList.remove('hidden');
         searchbtn.disabled = true;
         
-        // إخفاء الإحصائيات وزر التحميل دائماً
         if(searchStats) searchStats.classList.add('hidden');
         if(loadbtn) loadbtn.classList.add('hidden');
 
         try {
             const { data, error } = await supabaseClient.rpc('get_student_stats', { 
                 search_term: currentSearchTerm,
-                page_num: 1, // تم التثبيت على الصفحة الأولى
-                page_size: 1 // تم التثبيت على نتيجة واحدة
+                page_num: 1,
+                page_size: 1 
             });
 
             if (error) throw error;
@@ -54,7 +53,7 @@
             }
         } catch (err) {
             showError('حدث خطأ في الاتصال بقاعدة البيانات.');
-            console.error(err);
+            console.error(err); //لا اهتم هكر كان تقدر  : )
         } finally {
             loading.classList.add('hidden');
             searchbtn.disabled = false;

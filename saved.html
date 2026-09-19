@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+            <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-5M3JD3CP"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'GT-5M3JD3CP',{'cookie_domain': window.location.hostname});
+    
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التخصصات المحفوظة | جيت الكم؟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+        body { font-family: 'Tajawal', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#0a1a2f] bg-gradient-to-b from-[#0a1a2f] to-[#1f1f1f] bg-fixed text-gray-100 min-h-screen flex flex-col items-center justify-start pt-16 p-4">
+
+<div class="max-w-4xl w-full flex justify-between items-center mb-8 bg-[#020024]/60 p-4 rounded-2xl border border-gray-800 backdrop-blur-md shadow-lg relative z-50">
+    
+    <div class="relative">
+        <button id="menuBtn" onclick="toggleMenu()" class="p-2.5 bg-gray-900/60 border border-gray-700 rounded-xl text-white hover:bg-gray-800 transition shadow-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <!-- القائمة المنسدلة -->
+        <div id="dropdownMenu" class="absolute top-14 right-0 mt-2 w-64 bg-[#020024]/95 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right z-50">
+            <div class="p-3 space-y-2">
+                <a href="index.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
+                    🏠 الرئيسية
+                </a>
+                <a href="universities.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
+                    🏛️ اختار الجامعة و التخصص
+                </a>
+                <a href="saved.html" class="block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all">
+                    ⭐ التخصصات المختارة
+                </a>
+                <a href="stats.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
+                    📊 إحصائيات تفاعلية
+                </a>
+                <a href="about.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
+                    👨‍💻 من أنا
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="text-xl font-bold text-white">التخصصات المختارة ⭐</h1>
+    
+    <a href="universities.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-semibold transition duration-200 text-sm">
+        🏛️ تصفح المزيد
+    </a>
+</div>
+
+    <main class="max-w-4xl w-full">
+        <div id="saved-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- سيتم تعبئة الكروت هنا ديناميكياً -->
+        </div>
+
+        <div id="empty-msg" class="hidden text-center text-gray-400 bg-[#020024]/80 p-12 rounded-3xl shadow-xl border border-gray-800 backdrop-blur-xl mt-8">
+            <p class="text-xl mb-3">قائمتك المختارة فارغة حالياً 📭</p>
+            <a href="universities.html" class="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold transition hover:bg-blue-700">اختار تخصصاتك الآن</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedUniversities();
+        });
+
+        function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.classList.toggle('opacity-0');
+            menu.classList.toggle('invisible');
+            menu.classList.toggle('scale-95');
+            menu.classList.toggle('scale-100');
+        }
+
+        window.addEventListener('click', function(e) {
+            const menu = document.getElementById('dropdownMenu');
+            const btn = document.getElementById('menuBtn');
+            if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.add('opacity-0', 'invisible', 'scale-95');
+                menu.classList.remove('scale-100');
+            }
+        });
+
+        function loadSavedUniversities() {
+            const grid = document.getElementById('saved-grid');
+            const emptyMsg = document.getElementById('empty-msg');
+            const savedList = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+
+            grid.innerHTML = '';
+
+            if (savedList.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+
+            savedList.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-[#020024]/80 p-5 rounded-3xl shadow-xl border border-gray-800 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden";
+                
+                let genderBadgeColor = "bg-gray-800 text-gray-300 border border-gray-700";
+                if (item.gender === "طالبات فقط") genderBadgeColor = "bg-pink-950/50 text-pink-300 border border-pink-800/50";
+                if (item.gender === "طلاب فقط") genderBadgeColor = "bg-blue-950/50 text-blue-300 border border-blue-800/50";
+
+                const regionText = item.region ? `📍 ${item.region}` : '';
+                const preferenceNumber = index + 1;
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-3 py-1 text-xs font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/40 rounded-xl shadow-sm">
+                                الرغبة (${preferenceNumber})
+                            </span>
+                            <span class="inline-block px-2.5 py-0.5 text-xs font-semibold bg-emerald-950/50 text-emerald-300 border border-emerald-800/50 rounded-lg">${item.admission_type}</span>
+                        </div>
+                        
+                        <span class="inline-block px-3 py-1 text-xs font-bold bg-blue-600/20 text-blue-300 border border-blue-500/30 rounded-full mb-2">${item.category}</span>
+                        <h3 class="text-lg font-bold text-white leading-tight mb-1">${item.program}</h3>
+                        <p class="text-sm text-gray-300 font-medium">${item.university}</p>
+                        <p class="text-xs text-gray-400 mb-4">${regionText}</p>
+                    </div>
+                    <div>
+                        <div class="border-t border-gray-800 pt-3 flex justify-between items-center mb-3">
+                            <div class="text-center">
+                                <span class="block text-xs text-gray-400">النسبة المطلوبة</span>
+                                <span class="font-bold text-green-400 text-lg">%${item.percentage}</span>
+                            </div>
+                            <div class="text-center">
+                                <span class="block text-xs text-gray-400">الفئة</span>
+                                <span class="inline-block px-2.5 py-1 text-xs font-bold ${genderBadgeColor} rounded-xl mt-1">${item.gender}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            ${index > 0 ? `<button onclick="moveUp(${index})" class="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 py-2 rounded-xl transition text-xs font-bold">⬆️ أطلع فوق</button>` : ''}
+                            ${index < savedList.length - 1 ? `<button onclick="moveDown(${index})" class="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 py-2 rounded-xl transition text-xs font-bold">⬇️ انزل تحت</button>` : ''}
+                            <button onclick="removeSaved(${index})" class="bg-red-600/20 hover:bg-red-600/40 border border-red-500/40 text-red-300 font-bold px-3 py-2 rounded-xl transition text-xs">
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function moveUp(index) {
+            let savedList = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            if (index > 0) {
+                const temp = savedList[index];
+                savedList[index] = savedList[index - 1];
+                savedList[index - 1] = temp;
+                localStorage.setItem('savedUniversities', JSON.stringify(savedList));
+                loadSavedUniversities();
+            }
+        }
+
+        function moveDown(index) {
+            let savedList = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            if (index < savedList.length - 1) {
+                const temp = savedList[index];
+                savedList[index] = savedList[index + 1];
+                savedList[index + 1] = temp;
+                localStorage.setItem('savedUniversities', JSON.stringify(savedList));
+                loadSavedUniversities();
+            }
+        }
+
+        function removeSaved(index) {
+            let savedList = JSON.parse(localStorage.getItem('savedUniversities')) || [];
+            savedList.splice(index, 1);
+            localStorage.setItem('savedUniversities', JSON.stringify(savedList));
+            loadSavedUniversities();
+        }
+    </script>
+</body>
+</html>
