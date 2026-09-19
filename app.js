@@ -70,6 +70,7 @@
             if (student.status === 'نجاح') {
                 htmlContent += `
                     <div class="relative overflow-hidden border border-green-500/30 bg-gradient-to-br from-green-900/20 to-transparent p-6 rounded-2xl shadow-lg backdrop-blur-sm transition-all hover:border-green-500/50">
+                        <div class="pb-3">
                         <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-500"></div>
                         
                         <h2 class="text-2xl font-bold text-green-400 mb-1">${student.name}</h2>
@@ -90,6 +91,10 @@
                             <p class="mb-2">🏆 الترتيب: <strong class="text-white">المركز ${item.rank.toLocaleString()}</strong> من أصل ${item.total_passed.toLocaleString()} ناجح.</p>
                             <p>⭐ الأداء: ضمن <strong class="text-white">أفضل ${item.top_percentage}%</strong> من الناجحين.</p>
                         </div>
+                        </div>
+                        <a href="universities.html?percentage=${student.percentage}" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition text-center block">
+        البحث عن الجامعات الملائمة 🏛️
+    </a>
                     </div>`;
             } else {
                 htmlContent += `
