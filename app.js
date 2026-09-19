@@ -17,11 +17,12 @@
         }
         if (containsLetters) {
             showError(' البحث متاح برقم الجلوس فقط ( أرقام ) . .');
-            return;
-        currentSearchTerm = input;
-        document.getElementById('resultarea').innerHTML = '';
+            return;}
+            else{
+            currentSearchTerm = input;
+            document.getElementById('resultarea').innerHTML = '';
         
-        await fetchResults();
+            await fetchResults();
     }}
 
     async function fetchResults() {
