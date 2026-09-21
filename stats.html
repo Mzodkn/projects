@@ -16,6 +16,8 @@
     <title>الإحصائيات التحليلية | جيت الكم؟</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     </style>
@@ -30,26 +32,28 @@
             </svg>
         </button>
         
-        <div id="dropdownMenu" class="absolute top-16 right-0 mt-2 w-64 bg-[#020024]/90 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right">
-            <div class="p-3 space-y-2">
-                <a href="index.html" class="block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all">
-                    🏠 الرئيسية
-                </a>
-                  <a href="universities.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
-                    🏛️ اختار الجامعة و التخصص
-                </a>
-                 <a href="saved.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
-                       ⭐ حفظ التخصص
-                    </a>
-                <a href="stats.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
-                    📊 إحصائيات تفاعلية
-                </a>
-                
-                <a href="about.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
-                    👨‍💻 من أنا
-                </a>
-            </div>
-        </div>
+<div id="dropdownMenu" class="absolute top-16 right-0 mt-2 w-64 bg-[#020024]/90 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right">
+    <div class="p-3 space-y-2">
+        <a href="index.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏠 الرئيسية
+        </a>
+        <a href="universities.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏛️ اختار الجامعة و التخصص
+        </a>
+                <a href="scholars.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            المنح الجامعية
+        </a>
+        <a href="saved.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            ⭐ التخصصات المختارة
+        </a>
+        <a href="stats.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            📊 إحصائيات تفاعلية
+        </a>
+        <a href="about.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            👨‍💻 من أنا
+        </a>
+    </div>
+</div>
     </div>
 
     <div class="max-w-5xl w-full bg-[#020024]/80 rounded-3xl shadow-2xl shadow-blue-900/20 p-6 sm:p-10 mb-10 mt-14 border border-gray-800 backdrop-blur-xl">
@@ -115,8 +119,30 @@
 
 
       document.addEventListener("DOMContentLoaded", function() {
-        
-            
+ 
+    let currentPage = window.location.pathname.split("/").pop();
+    
+    if (currentPage === "" || currentPage === "/") {
+        currentPage = "index.html";
+    }
+
+    const menuLinks = document.querySelectorAll("#dropdownMenu .menu-link");
+    
+    menuLinks.forEach(link => {
+        const linkHref = link.getAttribute("href");
+        if (linkHref === currentPage) {
+            link.className = "menu-link block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all";
+        } else {
+            link.className = "menu-link block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 border border-transparent rounded-xl transition-all font-medium";
+        }
+    });
+
+
+
+
+
+
+
 
 
 

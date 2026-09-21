@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- تدرج لون الخلفية (متناسق مع الموقع) -->
+    <linearGradient id="grad-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1a2f" />
+      <stop offset="100%" stop-color="#020024" />
+    </linearGradient>
+    
+    <!-- تدرج اللون الأزرق لقبعة التخرج -->
+    <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    
+    <!-- تدرج ذهبي لشرابة التخرج -->
+    <linearGradient id="grad-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+
+  <!-- المربع ذو الحواف الدائرية (الخلفية) -->
+  <rect width="512" height="512" rx="120" fill="url(#grad-bg)" stroke="#1e3a8a" stroke-width="12" />
+
+  <!-- الجزء العلوي من قبعة التخرج -->
+  <path d="M256 150 L420 245 L256 340 L92 245 Z" fill="url(#grad-blue)" />
+  
+  <!-- قاعدة قبعة التخرج -->
+  <path d="M140 273 L140 360 C140 410 256 440 256 440 C256 440 372 410 372 360 L372 273 L256 340 Z" fill="#1E3A8A" opacity="0.8" />
+  
+  <!-- زر قبعة التخرج -->
+  <circle cx="256" cy="245" r="12" fill="url(#grad-gold)" />
+  
+  <!-- خيط وشرابة التخرج (اللون الذهبي) -->
+  <path d="M256 245 Q 360 260 360 320" fill="none" stroke="url(#grad-gold)" stroke-width="6" stroke-linecap="round" />
+  <path d="M352 320 L368 320 L372 360 L348 360 Z" fill="url(#grad-gold)" />
+</svg>

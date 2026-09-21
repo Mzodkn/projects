@@ -16,10 +16,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> 2026 جيت الكم؟</title>
     <meta name="description" content=" اول موقع سوداني لمعرفت ترتيبك في امتحانات الشهادة السودانية">
+    <meta name="keywords" content="دليل القبول للجامعات السودانية, نسب القبول للجامعات السودانية, معرفة ترتيبي في الشهادة السودانية, جيت الكم, نتيجة الشهادة السودانية, تخصصات الجامعات السودانية, القبول العام السودان, حساب نسبة الشهادة,جامعة الخرطوم,انا الكم,تقديم الجامعات السودانية, جامعات السودان">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
+<link rel="icon" type="image/svg+xml" href="logo.svg">
   <style>
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 </style>
@@ -33,26 +33,28 @@
             </svg>
         </button>
         
-        <div id="dropdownMenu" class="absolute top-16 right-0 mt-2 w-64 bg-[#020024]/90 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right">
-            <div class="p-3 space-y-2">
-                <a href="index.html" class="block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all">
-                    🏠 الرئيسية
-                </a>
-                  <a href="universities.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
-                    🏛️ اختار الجامعة و التخصص
-                </a>
-                 <a href="saved.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
-                       ⭐ التخصصات المختارة
-                    </a>
-                <a href="stats.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
-                    📊 إحصائيات تفاعلية
-                </a>
-                
-                <a href="about.html" class="block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all font-medium">
-                    👨‍💻 من أنا
-                </a>
-            </div>
-        </div>
+<div id="dropdownMenu" class="absolute top-16 right-0 mt-2 w-64 bg-[#020024]/90 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right">
+    <div class="p-3 space-y-2">
+        <a href="index.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏠 الرئيسية
+        </a>
+        <a href="universities.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏛️ اختار الجامعة و التخصص
+        </a>
+                <a href="scholars.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            المنح الجامعية
+        </a>
+        <a href="saved.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            ⭐ التخصصات المختارة
+        </a>
+        <a href="stats.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            📊 إحصائيات تفاعلية
+        </a>
+        <a href="about.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            👨‍💻 من أنا
+        </a>
+    </div>
+</div>
     </div>
     
     <h1 class="text-3xl font-bold text-center mb-4 p-10">جيت الكم؟</h1>
@@ -140,8 +142,7 @@
 <div class="flex flex-col sm:flex-row gap-3 mb-8 w-full">
                  
     
-    <input type="text" id="searchInput" class="w-full px-5 py-4 rounded-xl border border-gray-700 bg-gray-900/60 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all backdrop-blur-md font-medium shadow-inner" placeholder="أدخل رقم الجلوس  ...">
-    
+    <input type="text"  id="searchInput" class="w-full px-5 py-4 rounded-xl border border-gray-700 bg-gray-900/60 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all backdrop-blur-md font-medium shadow-inner" placeholder="أدخل رقم الجلوس  ...">
   <button class="bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white px-10 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-orange-600/30 transform hover:-translate-y-1 active:translate-y-0" onclick="scb()" id="searchbtn">
     بحث
 </button>
@@ -151,11 +152,7 @@
         <div id="searchStats" class="hidden text-md font-semibold text-blue-700 bg-blue-50 p-3 rounded-lg mb-4 text-center border border-blue-200"></div>
         <div id="resultarea" class="hidden space-y-4"></div>
 
-        <div class="text-center mt-6">
-            <button id="loadbtn" onclick="load()" class="hidden bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-semibold transition duration-200 w-full sm:w-auto shadow-md">
-            عرض  10 أخرين
-            </button>
-        </div>
+
     </div>
 </div>
     <div class="fixed bottom-4 left-4 z-50">
@@ -175,8 +172,27 @@
         </div>
         
     </div>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+    let currentPage = window.location.pathname.split("/").pop();
+    
+    if (currentPage === "" || currentPage === "/") {
+        currentPage = "index.html";
+    }
 
-   <script src="app.js?1"></script>
+    const menuLinks = document.querySelectorAll("#dropdownMenu .menu-link");
+    
+    menuLinks.forEach(link => {
+        const linkHref = link.getAttribute("href");
+        if (linkHref === currentPage) {
+            link.className = "menu-link block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all";
+        } else {
+            link.className = "menu-link block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 border border-transparent rounded-xl transition-all font-medium";
+        }
+    });
+});
+    </script>
+   <script src="app.js"></script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

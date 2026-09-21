@@ -19,16 +19,41 @@
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     </style>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
 
 </head>
 <body class="bg-[#0a1a2f] bg-gradient-to-b from-[#0a1a2f] to-[#1f1f1f] bg-fixed text-gray-100 min-h-screen flex flex-col items-center pt-8 p-4 relative">
 
-    <div class="max-w-2xl w-full flex justify-between items-center mb-8 bg-[#020024]/60 p-4 rounded-2xl border border-gray-800 backdrop-blur-md shadow-lg">
-        <a href="index.html" class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-lg font-semibold transition duration-200 border border-gray-600 shadow-md text-sm">
-            🏠 العودة للرئيسية
+  <div class="fixed top-6 right-6 z-50">
+        <button id="menuBtn" onclick="toggleMenu()" class="p-3 bg-gray-900/60 border border-gray-700 rounded-xl backdrop-blur-md text-white hover:bg-gray-800 transition-all shadow-lg hover:shadow-blue-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+<div id="dropdownMenu" class="absolute top-16 right-0 mt-2 w-64 bg-[#020024]/90 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right">
+    <div class="p-3 space-y-2">
+        <a href="index.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏠 الرئيسية
         </a>
-        <h1 class="text-xl font-bold text-white"> عني  👨‍💻</h1>
-       
+        <a href="universities.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏛️ اختار الجامعة و التخصص
+        </a>
+                <a href="scholars.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            المنح الجامعية
+        </a>
+        <a href="saved.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            ⭐ التخصصات المختارة
+        </a>
+        <a href="stats.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            📊 إحصائيات تفاعلية
+        </a>
+        <a href="about.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            👨‍💻 من أنا
+        </a>
+    </div>
+</div>
+    </div>
     </div>
 
     <div class="max-w-2xl w-full bg-[#020024]/80 rounded-3xl shadow-2xl shadow-blue-900/20 p-8 text-center border border-gray-800 backdrop-blur-xl relative overflow-hidden">
@@ -77,4 +102,44 @@
 
 
 </body>
+    <script >
+            window.addEventListener("DOMContentLoaded", () => {
+    let currentPage = window.location.pathname.split("/").pop();
+    
+    if (currentPage === "" || currentPage === "/") {
+        currentPage = "index.html";
+    }
+    const menuLinks = document.querySelectorAll("#dropdownMenu .menu-link");
+    
+    menuLinks.forEach(link => {
+        const linkHref = link.getAttribute("href");
+        if (linkHref === currentPage) {
+            link.className = "menu-link block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all";
+        } else {
+            link.className = "menu-link block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 border border-transparent rounded-xl transition-all font-medium";
+        }
+    });
+});
+    //menuo drop
+    
+    function toggleMenu() {
+        const menu = document.getElementById('dropdownMenu');
+        if (menu.classList.contains('opacity-0')) {
+            menu.classList.remove('opacity-0', 'invisible', 'scale-95');
+            menu.classList.add('opacity-100', 'visible', 'scale-100');
+        } else {
+            menu.classList.add('opacity-0', 'invisible', 'scale-95');
+            menu.classList.remove('opacity-100', 'visible', 'scale-100');
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('dropdownMenu');
+        const btn = document.getElementById('menuBtn');
+        if (menu && btn && !menu.contains(event.target) && !btn.contains(event.target)) {
+            menu.classList.add('opacity-0', 'invisible', 'scale-95');
+            menu.classList.remove('opacity-100', 'visible', 'scale-100');
+        }
+    });
+    </script>
 </html>

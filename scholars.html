@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنح الدراسية المتاحة | دليل القبول</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+        body { font-family: 'Tajawal', sans-serif; }
+        
+        /* تأثيرات للنافذة المنبثقة */
+        .modal-enter { opacity: 0; transform: scale(0.9); }
+        .modal-enter-active { opacity: 1; transform: scale(1); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .modal-exit { opacity: 1; transform: scale(1); }
+        .modal-exit-active { opacity: 0; transform: scale(0.9); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-[#0a1a2f] bg-gradient-to-b from-[#0a1a2f] to-[#1f1f1f] bg-fixed text-gray-100 min-h-screen p-4 sm:p-8">
+
+    <!-- شريط علوي بسيط -->
+    <div class="relative">
+        <button id="menuBtn" onclick="toggleMenu()" class="p-2.5 bg-gray-900/60 border border-gray-700 rounded-xl text-white hover:bg-gray-800 transition shadow-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+<div id="dropdownMenu" class="absolute top-16 right-0 mt-2 w-64 bg-[#020024]/90 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right z-50">
+    <div class="p-3 space-y-2">
+        <a href="index.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏠 الرئيسية
+        </a>
+        <a href="universities.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏛️ اختار الجامعة و التخصص
+        </a>
+                <a href="scholars.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            المنح الجامعية
+        </a>
+        <a href="saved.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            ⭐ التخصصات المختارة
+        </a>
+        <a href="stats.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            📊 إحصائيات تفاعلية
+        </a>
+        <a href="about.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            👨‍💻 من أنا
+        </a>
+    </div>
+</div>
+    </div>
+
+    <!-- حاوية البطاقات -->
+    <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="scholarships-container">
+        <!-- سيتم حقن البطاقات هنا عبر الجافاسكريبت -->
+    </main>
+
+    <!-- النافذة المنبثقة (Modal) للتفاصيل -->
+    <div id="detailsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div id="modalContent" class="bg-[#020024] border border-gray-700 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+            
+            <!-- رأس النافذة -->
+            <div class="sticky top-0 bg-[#020024]/95 backdrop-blur border-b border-gray-800 p-5 flex justify-between items-center z-10">
+                <h2 id="modalTitle" class="text-2xl font-bold text-white flex items-center gap-2"></h2>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-red-500/20 hover:text-red-400 p-2 rounded-xl transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- تفاصيل المنحة -->
+            <div class="p-6 space-y-6">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-gray-900/50 p-4 rounded-2xl border border-gray-800">
+                        <span class="block text-sm text-gray-400 mb-1">📅 آخر موعد للتقديم</span>
+                        <span id="modalDeadline" class="font-bold text-red-400 text-lg"></span>
+                    </div>
+                    <div class="bg-gray-900/50 p-4 rounded-2xl border border-gray-800">
+                        <span class="block text-sm text-gray-400 mb-1">💰 التغطية المالية</span>
+                        <span id="modalCoverage" class="font-bold text-green-400 text-lg"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-blue-300 mb-3 border-b border-gray-800 pb-2">🎯 الشروط والمعايير</h3>
+                    <ul id="modalConditions" class="space-y-2 text-gray-300 list-inside"></ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-blue-300 mb-3 border-b border-gray-800 pb-2">📄 الأوراق المطلوبة</h3>
+                    <ul id="modalDocs" class="space-y-2 text-gray-300 list-inside"></ul>
+                </div>
+                
+                <div id="modalNotesContainer" class="bg-blue-900/20 border border-blue-500/30 p-4 rounded-2xl">
+                    <h4 class="font-bold text-blue-400 mb-1">💡 ملاحظة هامة:</h4>
+                    <p id="modalNotes" class="text-sm text-blue-200 leading-relaxed"></p>
+                </div>
+
+            </div>
+
+            <!-- زر الإغلاق السفلي -->
+            <div class="p-5 border-t border-gray-800 bg-gray-900/30">
+                <button onclick="closeModal()" class="w-full py-3 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-xl transition border border-gray-700">
+                    إغلاق التفاصيل
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // قاعدة بيانات المنح
+        const scholarships = [
+            {
+                id: 1,
+                title: "منصة ادرس في السعودية",
+                country: "السعودية 🇸🇦",
+                specialization: "تخصصات متعددة (تقنية، هندسة، إدارة)",
+                deadline: "6 أكتوبر 2026",
+                coverage: "مولة بالكامل (بعض التخصصات جزئية)",
+                conditions: [
+                    "العمر يجب أن يكون بين 17 و 25 عاماً.",
+                    "لا تشترط نسبة محددة، لكن يُنصح بشدة بنسبة 75% فأعلى لزيادة فرص القبول."
+                ],
+                docs: [
+                    "جواز سفر ساري المفعول.",
+                    "فحص طبي معتمد.",
+                    "فيش جنائي (شهادة خلو من السوابق)."
+                ],
+                notes: "المنصة توحد التقديم لعدة جامعات سعودية. ركز على التخصصات التقنية التي تبحث عن مواهب وتدعم شهاداتك الاحترافية."
+            },
+            {
+                id: 2,
+                title: "أولمبياد Open Doors",
+                country: "روسيا 🇷🇺",
+                specialization: "الرياضيات التطبيقية والذكاء الاصطناعي",
+                deadline: "1 نوفمبر 2026",
+                coverage: "تغطي الرسوم الدراسية بالكامل + نفقات أخرى (راتب شهري رمزي)",
+                conditions: [
+                    "يتم التقديم والقبول على مراحل (تصفيات).",
+                    "يجب اجتياز اختبار المرحلة الأولى (رفع الملفات/البورتفوليو).",
+                    "اجتياز اختبار المرحلة الثانية الأكاديمي."
+                ],
+                docs: [
+                    "جواز سفر ساري المفعول.",
+                    "عند القبول النهائي، سيُطلب منك ترجمة الجواز وتصديقه باللغة الروسية."
+                ],
+                notes: "هذه الفرصة لا تهتم بمعدل الثانوية العامة إطلاقاً، بل تقيس مهاراتك المباشرة في التخصص. تأهلك المسبق في منافسات سابقة يعطيك أفضلية كاسحة."
+            }
+        ];
+
+        const container = document.getElementById('scholarships-container');
+
+        // دالة إنشاء البطاقات
+        function renderScholarships() {
+            scholarships.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-[#020024]/80 p-6 rounded-3xl border border-gray-800 shadow-lg hover:shadow-blue-900/20 hover:border-blue-500/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between h-full backdrop-blur-xl";
+                card.onclick = () => openModal(item);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs font-bold rounded-lg border border-gray-700">${item.country}</span>
+                            <span class="px-3 py-1 bg-red-950/50 text-red-400 text-xs font-bold rounded-lg border border-red-900/50 animate-pulse">⏳ ${item.deadline}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">${item.title}</h3>
+                        <p class="text-sm text-blue-300 font-medium mb-4">🎓 ${item.specialization}</p>
+                    </div>
+                    <button class="mt-4 w-full py-2.5 bg-blue-600/20 text-blue-400 border border-blue-500/30 rounded-xl font-bold text-sm hover:bg-blue-600 hover:text-white transition-all">
+                        عرض التفاصيل والشروط ⬇️
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // دوال التحكم في النافذة المنبثقة
+        const modal = document.getElementById('detailsModal');
+        const modalContent = document.getElementById('modalContent');
+
+        function openModal(item) {
+            // تعبئة البيانات
+            document.getElementById('modalTitle').innerText = `${item.title} - ${item.country}`;
+            document.getElementById('modalDeadline').innerText = item.deadline;
+            document.getElementById('modalCoverage').innerText = item.coverage;
+            
+            document.getElementById('modalConditions').innerHTML = item.conditions.map(c => `<li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✔️</span> <span>${c}</span></li>`).join('');
+            document.getElementById('modalDocs').innerHTML = item.docs.map(d => `<li class="flex items-start gap-2"><span class="text-orange-400 mt-1">📄</span> <span>${d}</span></li>`).join('');
+            
+            if (item.notes) {
+                document.getElementById('modalNotesContainer').classList.remove('hidden');
+                document.getElementById('modalNotes').innerText = item.notes;
+            } else {
+                document.getElementById('modalNotesContainer').classList.add('hidden');
+            }
+
+            // إظهار النافذة بأنميشن
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('opacity-0', 'scale-95');
+                modalContent.classList.add('opacity-100', 'scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalContent.classList.remove('opacity-100', 'scale-100');
+            modalContent.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // إغلاق النافذة عند النقر خارجها
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // تشغيل الدالة عند تحميل الصفحة
+    // تشغيل الدوال عند تحميل الصفحة (هنا تم الدمج)
+        window.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. تشغيل دالة عرض المنح (كانت ناقصة)
+            renderScholarships();
+
+            // 2. تلوين الرابط النشط في القائمة المنسدلة
+            let currentPage = window.location.pathname.split("/").pop();
+            
+            if (currentPage === "" || currentPage === "/") {
+                currentPage = "index.html";
+            }
+            
+            const menuLinks = document.querySelectorAll("#dropdownMenu .menu-link");
+            
+            menuLinks.forEach(link => {
+                const linkHref = link.getAttribute("href");
+                if (linkHref === currentPage) {
+                    link.className = "menu-link block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all";
+                } else {
+                    link.className = "menu-link block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 border border-transparent rounded-xl transition-all font-medium";
+                }
+            });
+        });
+
+        // دالة التحكم في إظهار وإخفاء القائمة المنسدلة (الهامبرجر)
+        function toggleMenu() {
+            const menu = document.getElementById('dropdownMenu');
+            if (menu.classList.contains('opacity-0')) {
+                menu.classList.remove('opacity-0', 'invisible', 'scale-95');
+                menu.classList.add('opacity-100', 'visible', 'scale-100');
+            } else {
+                menu.classList.add('opacity-0', 'invisible', 'scale-95');
+                menu.classList.remove('opacity-100', 'visible', 'scale-100');
+            }
+        }
+
+        // إغلاق القائمة المنسدلة عند النقر في أي مكان خارجها
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('dropdownMenu');
+            const btn = document.getElementById('menuBtn');
+            if (menu && btn && !menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.classList.add('opacity-0', 'invisible', 'scale-95');
+                menu.classList.remove('opacity-100', 'visible', 'scale-100');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -6,24 +6,49 @@
     
     let currentSearchTerm = '';
 
-    async function scb() {
-        const input = document.getElementById('searchInput').value.trim();
-        if (!input) return;
-        const containsLetters = /[a-zA-Z\u0600-\u06FF]/.test(input);
-        if( input =="دازاي"){
-            document.getElementById('resultarea').classList.remove('hidden');
-             document.getElementById('resultarea').innerHTML = '<img src="daz.jpg" class="w-full max-w-md mx-auto rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 object-cover border border-gray-700/50">';
-            return
+// عرض المكان
+    window.addEventListener("DOMContentLoaded", () => {
+    let currentPage = window.location.pathname.split("/").pop();
+    
+    if (currentPage === "" || currentPage === "/") {
+        currentPage = "index.html";
+    }
+    const menuLinks = document.querySelectorAll("#dropdownMenu .menu-link");
+    
+    menuLinks.forEach(link => {
+        const linkHref = link.getAttribute("href");
+        if (linkHref === currentPage) {
+            link.className = "menu-link block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all";
+        } else {
+            link.className = "menu-link block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 border border-transparent rounded-xl transition-all font-medium";
         }
-        if (containsLetters) {
-            showError(' البحث متاح برقم الجلوس فقط ( أرقام ) . .');
-            return;}
-            else{
-            currentSearchTerm = input;
-            document.getElementById('resultarea').innerHTML = '';
-        
-            await fetchResults();
-    }}
+    });
+});
+
+
+
+async function scb() {
+    const input = document.getElementById('searchInput').value.trim();
+    if (!input) return;
+    if (input == "دازاي") {
+        document.getElementById('resultarea').classList.remove('hidden');
+        document.getElementById('resultarea').innerHTML = '<img src="daz.jpg" class="w-full max-w-md mx-auto rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 object-cover border border-gray-700/50">';
+        return;
+    }
+
+    let cleanInput = parseArabicNumbers(input);
+
+    const containsLetters = /[^0-9]/.test(cleanInput);
+
+    if (containsLetters) {
+        showError(' البحث متاح برقم الجلوس فقط ( أرقام ) . .');
+        return;
+    } else {
+        currentSearchTerm = cleanInput;
+        document.getElementById('resultarea').innerHTML = '';
+        await fetchResults();
+    }
+}
 
     async function fetchResults() {
         const loading = document.getElementById('loading');
@@ -59,6 +84,24 @@
             searchbtn.disabled = false;
         }
     }
+
+    // دالة تحويل الأرقام والفواصل العربية إلى تنسيق برمجي صحيح
+function parseArabicNumbers(str) {
+    if (!str) return '';
+    
+    // مصفوفة الأرقام العربية
+    const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    
+    // تحويل كل رقم عربي إلى ما يقابله بالإنجليزي
+    for (let i = 0; i < 10; i++) {
+        let regex = new RegExp(arabicNumbers[i], 'g');
+        str = str.replace(regex, i);
+    }
+    
+    // تحويل أي فاصلة (عربية أو أجنبية) إلى نقطة عشرية
+    return str.replace(/،/g, '.').replace(/,/g, '.');
+}
+
 
     function appendMatches(matches) {
         const resultarea = document.getElementById('resultarea');
@@ -128,6 +171,8 @@
         if(document.getElementById('searchStats')) document.getElementById('searchStats').classList.add('hidden');
         if(document.getElementById('loadbtn')) document.getElementById('loadbtn').classList.add('hidden');
     }
+
+    //menuo drop
     
     function toggleMenu() {
         const menu = document.getElementById('dropdownMenu');
