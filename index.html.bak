@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-5M3JD3CP"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'GT-5M3JD3CP',{'cookie_domain': window.location.hostname});
+    
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 2026 جيت الكم؟</title>
+    <meta name="description" content=" اول موقع سوداني لمعرفت ترتيبك في امتحانات الشهادة السودانية">
+    <meta name="keywords" content="دليل القبول للجامعات السودانية, نسب القبول للجامعات السودانية, معرفة ترتيبي في الشهادة السودانية, جيت الكم, نتيجة الشهادة السودانية, تخصصات الجامعات السودانية, القبول العام السودان, حساب نسبة الشهادة,جامعة الخرطوم,انا الكم,تقديم الجامعات السودانية, جامعات السودان">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+</style>
+    <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+</head>
+<body class="bg-[#0a1a2f] bg-gradient-to-b from-[#0a1a2f] to-[#1f1f1f] bg-fixed text-gray-100 min-h-screen flex flex-col items-center justify-start pt-16 p-2"><div class="max-w-3xl w-full rounded-2xl shadow-xl">
+    <div class="fixed top-6 right-6 z-50">
+        <button id="menuBtn" onclick="toggleMenu()" class="p-3 bg-gray-900/60 border border-gray-700 rounded-xl backdrop-blur-md text-white hover:bg-gray-800 transition-all shadow-lg hover:shadow-blue-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+<div id="dropdownMenu" class="absolute top-16 right-0 mt-2 w-64 bg-[#020024]/90 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform scale-95 origin-top-right">
+    <div class="p-3 space-y-2">
+        <a href="index.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏠 الرئيسية
+        </a>
+        <a href="universities.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            🏛️ اختار الجامعة و التخصص
+        </a>
+                <a href="scholars.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            المنح الجامعية
+        </a>
+        <a href="saved.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            ⭐ التخصصات المختارة
+        </a>
+        <a href="stats.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            📊 إحصائيات تفاعلية
+        </a>
+        <a href="about.html" class="menu-link block px-4 py-3 rounded-xl transition-all">
+            👨‍💻 من أنا
+        </a>
+    </div>
+</div>
+    </div>
+    
+    <h1 class="text-3xl font-bold text-center mb-4 p-10">جيت الكم؟</h1>
+    <strong class="block text-center text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 tracking-wide pb-4">
+   الأول من نوعه في السودان لمعرفت ترتيبك في امتحانات الشهادة السودنية
+</strong>
+    <strong class="block text-center text-lg mb-3">     ابحث برقم الجلوس واعرف ترتيبك بين الممتحنين لسنة 2026  </strong>
+        <strong class="block text-center text-lg mb-10">    وابحث عن الجامعة او التخصص الذي تريده </strong>
+
+    <div class="w-full mb-8">
+        <button onclick="toggleStats()" class="w-full flex items-center justify-between bg-[#020024]/60 border border-blue-500/30 rounded-2xl p-4 backdrop-blur-md shadow-lg transition hover:bg-[#020024]/80 text-white cursor-pointer group">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]">📊</span>
+                <span class="font-bold text-sm sm:text-base text-gray-200 group-hover:text-white transition-colors">إحصائيات نتيجة الشهادة العامة</span>
+            </div>
+            <svg id="statsIcon" class="w-6 h-6 text-gray-400 group-hover:text-blue-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+
+        <div id="statsContainer" class="hidden mt-4 transition-all duration-500 origin-top">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+                
+                <div class="bg-blue-900/20 border border-blue-500/30 rounded-2xl p-4 text-center backdrop-blur-sm shadow-lg hover:bg-blue-900/30 transition-all">
+                    <span class="block text-blue-400 text-sm font-semibold mb-1">إجمالي الجالسين</span>
+                    <span class="block text-3xl font-bold text-white mb-1">547,608</span>
+                    <span class="block text-xs text-gray-400">طالب وطالبة</span>
+                </div>
+                                <div class="bg-green-900/20 border border-green-500/30 rounded-2xl p-4 text-center backdrop-blur-sm shadow-lg hover:bg-green-900/30 transition-all">
+                    <span class="block text-green-400 text-sm font-semibold mb-1">إجمالي الناجحين</span>
+                    <span class="block text-3xl font-bold text-white mb-1">380,897</span>
+                    <span class="block text-xs text-green-300 font-medium">بنسبة نجاح 69.6%</span>
+                </div>
+                                <div class="bg-red-900/20 border border-red-500/30 rounded-2xl p-4 text-center backdrop-blur-sm shadow-lg hover:bg-red-900/30 transition-all">
+                    <span class="block text-red-400 text-sm font-semibold mb-1">حالات الرسوب</span>
+                    <span class="block text-3xl font-bold text-white mb-1">166,711</span>
+                    <span class="block text-xs text-red-300 font-medium">بنسبة رسوب 30.4%</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<div class="relative bg-gradient-to-br from-gray-900/80 to-[#020024] border border-blue-500/30 p-6 rounded-2xl backdrop-blur-md mb-6 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 group hover:border-blue-400/50 transition-all duration-300 shadow-xl shadow-blue-900/20">
+
+    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -z-10 group-hover:bg-blue-500/20 transition-all duration-500"></div>
+
+    <div class="flex-1 text-center md:text-right z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-green-400 text-xs font-bold mb-3 shadow-inner">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            عرض خاص لمستخدمين الموقع
+        </div>
+        
+        <h3 class="text-xl font-bold text-white mb-2 flex items-center justify-center md:justify-start gap-2">
+            🎓 خدمة التقديم للجامعات
+        </h3>
+        
+        <p class="text-gray-400 text-sm leading-relaxed">
+            وفر وقتك ومجهودك! بنقدم ليك في الجامعات بطريقة ومضمونة بسعر رمزي ومغري . تواصل معانا .
+        </p>
+    </div>
+
+    <div class="w-full md:w-auto z-10 flex flex-col items-center">
+        <a href="https://wa.me/249114933762" target="_blank" class="w-full md:w-auto flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 shadow-lg shadow-green-900/40 hover:shadow-green-500/50 transform hover:-translate-y-1 border border-green-400/30">
+            <svg class="w-6 h-6 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <span dir="ltr">+249 11 493 3762</span>
+        </a>
+    </div>
+</div>
+
+    
+
+
+    
+    <div class="bg-[#020024] rounded-2xl shadow-2xl shadow-blue-900/20 p-8 mx-2 mb-10 border border-gray-800">        
+        <h2 class="text-3xl font-bold text-center text-white mb-6">شوف النتيجة</h2>
+                <strong class="block text-center text-lg mb-6">    ثم اختر الجامعة او التخصص </strong>
+                <strong class="block text-center text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-600 tracking-wide pb-4 mb-9">
+ سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر </strong>  
+
+<div class="flex flex-col sm:flex-row gap-3 mb-8 w-full">
+                 
+    
+    <input type="text"  id="searchInput" class="w-full px-5 py-4 rounded-xl border border-gray-700 bg-gray-900/60 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all backdrop-blur-md font-medium shadow-inner" placeholder="أدخل رقم الجلوس  ...">
+  <button class="bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white px-10 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-orange-600/30 transform hover:-translate-y-1 active:translate-y-0" onclick="scb()" id="searchbtn">
+    بحث
+</button>
+</div>
+
+        <div id="loading" class="hidden text-center text-blue-300 my-4">جاري البحث وتحليل البيانات...</div>
+        <div id="searchStats" class="hidden text-md font-semibold text-blue-700 bg-blue-50 p-3 rounded-lg mb-4 text-center border border-blue-200"></div>
+        <div id="resultarea" class="hidden space-y-4"></div>
+
+
+    </div>
+</div>
+    <div class="fixed bottom-4 left-4 z-50">
+        <button onclick="ester()" class="opacity-20 hover:opacity-100 transition-opacity duration-300 text-3xl filter drop-shadow-lg cursor-pointer">
+            🐦
+        </button>
+    </div>
+
+    <div id="manarToast" class="fixed bottom-16 left-4 flex flex-col gap-2 transform scale-0 opacity-0 transition-all duration-300 origin-bottom-left z-50" dir="rtl">
+        
+        <div class="bg-[#202c33] text-white px-4 py-2 rounded-2xl rounded-br-none border border-gray-700/50 shadow-2xl max-w-xs w-fit">
+            <p class="text-sm font-medium">دعواتكم منار الله يوفقها 🐦🖤</p>
+        </div>
+        
+        <div class="bg-[#202c33] text-white px-4 py-2 rounded-2xl rounded-br-none border border-gray-700/50 shadow-2xl max-w-xs w-fit">
+            <p class="text-sm font-medium">واكتب دازاي برضو 🐦🖤🖤🖤</p>
+        </div>
+        
+    </div>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+    let currentPage = window.location.pathname.split("/").pop();
+    
+    if (currentPage === "" || currentPage === "/") {
+        currentPage = "index.html";
+    }
+
+    const menuLinks = document.querySelectorAll("#dropdownMenu .menu-link");
+    
+    menuLinks.forEach(link => {
+        const linkHref = link.getAttribute("href");
+        if (linkHref === currentPage) {
+            link.className = "menu-link block px-4 py-3 text-white bg-blue-600/20 border border-blue-500/30 rounded-xl font-bold transition-all";
+        } else {
+            link.className = "menu-link block px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-800/50 border border-transparent rounded-xl transition-all font-medium";
+        }
+    });
+});
+    </script>
+   <script src="app.js"></script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
